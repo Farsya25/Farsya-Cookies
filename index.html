@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farsya Cookies</title>
+    <link rel="icon" href="assets/Logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* === BASE STYLES === */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        section {
+            scroll-margin-top: 90px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Lato', sans-serif;
+        }
+
+        body {
+            background: #F4EBD0;
+            color: #6D4C41;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+        }
+
+        /* === HEADER === */
+        header {
+            background: #8B4513;
+            padding: 0.5rem 1rem;
+            position: sticky;
+            top: 0;
+            height: 90px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            gap: 1rem;
+        }
+
+        .logo-small {
+            height: 50px;
+            width: auto;
+            transition: transform 0.3s;
+        }
+
+        .logo-main {
+            height: 80px;
+            width: auto;
+            margin: 0 1rem;
+            flex-shrink: 0;
+        }
+
+        .nav-left, .nav-right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-left { justify-content: flex-start; }
+        .nav-right { justify-content: flex-end; }
+
+        nav a {
+            color: #F4EBD0;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            padding: 0.3rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+            border-color: #F4EBD0;
+        }
+
+        .social-icon {
+            height: 28px;
+            width: auto;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.15);
+        }
+
+        /* === HERO === */
+        .hero {
+            display: flex;
+            padding: 2rem;
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 1rem auto;
+            align-items: center;
+        }
+
+        .hero-left, .hero-center, .hero-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .decorative-logo {
+            box-shadow: none !important;
+            border: none !important;
+            max-width: 300px;
+        }
+
+        .social-text {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 1.1rem;
+            background: rgba(255,255,255,0.9);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+        }
+
+        /* === OUR PRODUCTS === */
+        .products {
+            padding: 3rem 2rem;
+            background: #fff;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 1.5rem auto;
+        }
+
+        .product-card {
+            background: #fff;
+            padding: 1.2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        /* === POPUP === */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+        }
+
+        .popup-content {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 95%;
+            max-width: 400px;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: popupOpen 0.3s ease-out;
+        }
+
+        input {
+            text-align: center;
+            height: 30px;
+            width: 35px;
+        }
+
+        @keyframes popupOpen {
+            from { opacity: 0; transform: translate(-50%, -60%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+
+        #popup-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .harga-popup {
+            font-size: 1.3rem;
+            color: #8B4513;
+            margin: 0.5rem 0;
+            font-weight: bold;
+        }
+
+        .product-details {
+            font-size: 0.95rem;
+            color: #666;
+            margin: 1rem 0;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        .qty-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .qty-control button {
+            padding: 8px 20px;
+            background: #8B4513;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .qty-control button:hover {
+            background: #6D4C41;
+        }
+
+        .beli-button {
+            background: #8B4513;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .beli-button:hover {
+            transform: scale(1.05);
+            background: #6D4C41;
+        }
+
+        /* === TOP SELLER === */
+        .top-seller {
+            padding: 3rem 2rem;
+            background: #F4EBD0;
+            text-align: center;
+        }
+
+        .best-seller {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* === LOCATION === */
+        .location {
+            padding: 3rem 2rem;
+            background: #fff;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .location-content {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        
+        .map-screenshot {
+            flex: 1;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .map-screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .address {
+            flex: 1;
+            padding: 1.5rem;
+            background: #F4EBD0;
+            border-radius: 10px;
+        }
+        
+        .address h3 {
+            color: #8B4513;
+            margin-bottom: 1rem;
+        }
+        
+        .address p {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+        
+        .business-hours {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed #8B4513;
+        }
+        
+        @media (max-width: 768px) {
+            .location-content {
+                flex-direction: column;
+            }
+            
+            .map-screenshot, .address {
+                width: 100%;
+            }
+        }
+
+        /* === REVISI FOOTER === */
+        footer {
+            background: #8B4513;
+            color: #F4EBD0;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            height: 80px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #F4EBD0;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+                gap: 1rem;
+                justify-content: center;
+            }
+            
+            .logo-main {
+                order: -1;
+                margin: 0.5rem 0;
+            }
+            
+            .nav-left, .nav-right {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero img {
+                max-width: 300px;
+            }
+            
+            .popup-content {
+                padding: 1.5rem;
+            }
+            
+            .social-icon {
+                height: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="nav-left">
+                <img src="Logo kecil.png" class="logo-small" alt="Small Logo">
+                <a href="#products">Our Products</a>
+                <a href="#top-seller">Top Seller</a>
+            </div>
+            <img src="Logo.png" class="logo-main" alt="Farsya Cookies">
+            <div class="nav-right">
+                <a href="#location">Location</a>
+                <a href="https://www.instagram.com/hafssyaa?igsh=MXdseXF5ZzI0emk2Mw==" target="_blank">
+                    <img src="Instagram.png" class="social-icon" alt="Instagram">
+                </a>
+                <a href="https://wa.me/6282299987494" target="_blank">
+                    <img src="Whatsapp.png" class="social-icon" alt="WhatsApp">
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-left">
+            <img src="Hero Img.jpg" alt="Cookie Display 1">
+        </div>
+        <div class="hero-center">
+            <img src="Logo kecil.png" class="decorative-logo" alt="Decorative Logo">
+            <div class="social-text">
+                <span>📷 @hafssyaa</span>
+                <span>📞 +62 822-9998-7494</span>
+            </div>
+        </div>
+        <div class="hero-right">
+            <img src="Hero 2.jpg" alt="Cookie Display 2">
+        </div>
+    </section>
+
+    <!-- Our Products -->
+    <section id="products" class="products">
+        <h2>Our Cookies</h2>
+        <div class="product-grid">
+            <div class="product-card" onclick="showPopup('product1')">
+                <img src="Menu 1.jpg" alt="Classic Cookie">
+                <h3>Dark & Co</h3>
+                <p>Rp15,000/pcs</p>
+            </div>
+            <div class="product-card" onclick="showPopup('product2')">
+                <img src="Menu 2.webp" alt="Chocolate Cookie">
+                <h3>Doughlicious</h3>
+                <p>Rp18,000/pcs</p>
+            </div>
+            <div class="product-card" onclick="showPopup('product3')">
+                <img src="Menu 3.jpg" alt="Almond Cookie">
+                <h3>Sweet Kinder Bites</h3>
+                <p>Rp20,000/pcs</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popup -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <img id="popup-img" src="" alt="Product Image">
+            <h3 id="popup-title"></h3>
+            <div class="harga-popup" id="popup-price"></div>
+            <div class="product-details" id="popup-details"></div>
+            <div class="quantity-selector">
+                <div class="qty-control">
+                    <button onclick="updateQuantity(this, -1)">-</button>
+                    <input type="number" value="0" min="0">
+                    <button onclick="updateQuantity(this, 1)">+</button>
+                </div>
+            </div>
+            <button class="beli-button" onclick="showThankYou()">Beli Sekarang</button>
+        </div>
+    </div>
+
+    <!-- Top Seller -->
+    <section id="top-seller" class="top-seller">
+        <h2>Our Best Seller</h2>
+        <div class="best-seller">
+            <img src="Menu 1.jpg" alt="Best Seller Cookie">
+            <h3>Dark & Co</h3>
+            <p>Perpaduan coklat Belgia dengan kacang almond panggang</p>
+        </div>
+    </section>
+
+    <section id="location" class="location">
+        <h2>Outlet Location</h2>
+        <div class="location-content">
+            <div class="map-screenshot">
+                <!-- Ganti dengan screenshot peta lokasi Anda -->
+                <img src="Loc.png" alt="Peta Lokasi Farsya Cookies">
+            </div>
+            <div class="address">
+                <h3>Farsya Cookies</h3>
+                <p>📍 Jl. Alle Raya No.10</p>
+                <p>Rempoa, Kecamatan Ciputat Timur</p>
+                <p>Kota Tangerang Selatan, Banten 15412</p>
+                
+                <div class="business-hours">
+                    <h3>Jam Operasional:</h3>
+                    <p>Senin-Jumat: 09.00 - 20.00</p>
+                    <p>Sabtu-Minggu: 10.00 - 21.00</p>
+                </div>
+                
+                <p>📞 Hubungi: +62 822-9998-7494</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <img src="Logo kecil.png" class="footer-logo" alt="Footer Logo">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#products">Our Products</a>
+                <a href="#top-seller">Best Seller</a>
+                <a href="#location">Location</a>
+            </div>
+            <div class="footer-section">
+                <h4>Delivery</h4>
+                <p>🛵 +62 822-9998-7494</p>
+                <p>⏰ 09:00 - 21:00 WIB</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="copyright">© 2025 Farsya Cookies. All rights reserved</p>
+            <p class="tagline">Baked with Love & Tradition</p>
+        </div>
+    </footer>
+
+    <script>
+        const products = {
+            product1: {
+                price: "Rp15,000/pcs",
+                details: "Dibuat dengan mentega premium dan vanilla alami. Tersedia dalam kemasan 500gr"
+            },
+            product2: {
+                price: "Rp18,000/pcs",
+                details: "Menggunakan coklat Belgia dengan potongan almond panggang"
+            },
+            product3: {
+                price: "Rp20,000/pcs",
+                details: "Kombinasi sempurna madu asli dan kayu manis"
+            }
+        };
+        
+        document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - 90,
+                behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        function showPopup(productId) {
+            const product = document.querySelector(`[onclick="showPopup('${productId}')"]`);
+            document.getElementById('popup-img').src = product.querySelector('img').src;
+            document.getElementById('popup-title').textContent = product.querySelector('h3').textContent;
+            document.getElementById('popup-price').textContent = products[productId].price;
+            document.getElementById('popup-details').textContent = products[productId].details;
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        function updateQuantity(btn, change) {
+            const input = btn.parentElement.querySelector('input');
+            let newValue = parseInt(input.value) + change;
+            input.value = newValue < 0 ? 0 : newValue;
+        }
+
+        function showThankYou() {
+            alert("🎉 Anda sukses membeli produk ini!\nTerima kasih telah berbelanja di Farsya Cookies!");
+            closePopup();
+        }
+
+        function initMap() {
+            const location = { lat: -6.1754, lng: 106.8272 };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 15,
+                center: location,
+                mapTypeControl: false,
+                streetViewControl: false,
+                styles: [
+                    {
+                        featureType: "poi",
+                        elementType: "labels",
+                        stylers: [{ visibility: "off" }]
+                    }
+                ]
+            });
+            
+            new google.maps.Marker({
+                position: location,
+                map,
+                title: "Farsya Cookies"
+            });
+        }
+
+        window.onclick = function(event) {
+            const popup = document.getElementById('popup');
+            if (event.target === popup) {
+                popup.style.display = 'none';
+            }
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+</body>
+</html>
